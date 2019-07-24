@@ -4,11 +4,16 @@
 
 # Edge Detector
 
-Real-Time Holistically-Nested Edge Detection.
+Real-Time Holistically-Nested Edge Detection. Original paper by: [Xie, Saining and Tu, Zhuowen](https://github.com/s9xie/hed)
+
+<img src="assets/demo.gif">
+
 
 ## Implementation
 
 * **Swift** (iOS application)
 * **CoreML** (Machine Learning inference)
-* **Metal** (Visualization)
+* **Metal** (GPU computing and visualization)
+
+
 
