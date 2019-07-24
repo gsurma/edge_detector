@@ -60,7 +60,6 @@ final class MainMetalView: MTKView {
     
     private func render(_ view: MTKView) {
         guard let pixelBuffer = self.pixelBuffer else { return }
-        
         let width = CVPixelBufferGetWidth(pixelBuffer)
         let height = CVPixelBufferGetHeight(pixelBuffer)
         var cvTextureOut: CVMetalTexture?

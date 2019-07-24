@@ -23,10 +23,6 @@ class MainViewController: UIViewController {
         setUpDetector()
     }
     
-    private func setUpDetector() {
-
-    }
-    
     private func setUpCamera() {
         mainVideoCapture = MainVideoCapture()
         mainVideoCapture.delegate = self
@@ -35,6 +31,11 @@ class MainViewController: UIViewController {
                 self.mainVideoCapture.start()
             }
         }
+    }
+    
+    private func setUpDetector() {
+        edgeDetector = EdgeDetector()
+        edgeDetector.delegate = self
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -47,8 +48,18 @@ extension MainViewController: VideoCaptureDelegate {
     func videoCapture(_ capture: MainVideoCapture, didCaptureVideoFrame pixelBuffer: CVPixelBuffer?, timestamp: CMTime) {
         
         DispatchQueue.main.async {
-            self.mainMetalView.pixelBuffer = pixelBuffer
+            if let pb = pixelBuffer {
+                self.mainMetalView.pixelBuffer = pb
+                self.edgeDetector.predict(pixelBuffer: pb)
+            }
         }
+    }
+}
+
+extension MainViewController: EdgeDetectorDelegate {
+    
+    func predictionCompleted(edgeProbabilities: [Float]) {
+        
     }
 }
 
