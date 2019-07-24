@@ -15,6 +15,8 @@
 		6018089D22E8720A009057A8 /* EdgeDetectorModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6018089C22E8720A009057A8 /* EdgeDetectorModel.mlmodel */; };
 		601808A322E87323009057A8 /* EdgeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601808A222E87323009057A8 /* EdgeDetector.swift */; };
 		601808A522E87342009057A8 /* MainMetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601808A422E87342009057A8 /* MainMetalView.swift */; };
+		601808A722E8751F009057A8 /* MainVideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601808A622E8751F009057A8 /* MainVideoCapture.swift */; };
+		601808AA22E876B9009057A8 /* mainShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 601808A922E876B9009057A8 /* mainShaders.metal */; };
 		C15DA17C104C6286FBAE5794 /* Pods_EdgeDetector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5815663886E9FC7D2FDD0AE /* Pods_EdgeDetector.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +32,8 @@
 		6018089C22E8720A009057A8 /* EdgeDetectorModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = EdgeDetectorModel.mlmodel; sourceTree = "<group>"; };
 		601808A222E87323009057A8 /* EdgeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeDetector.swift; sourceTree = "<group>"; };
 		601808A422E87342009057A8 /* MainMetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMetalView.swift; sourceTree = "<group>"; };
+		601808A622E8751F009057A8 /* MainVideoCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVideoCapture.swift; sourceTree = "<group>"; };
+		601808A922E876B9009057A8 /* mainShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = mainShaders.metal; sourceTree = "<group>"; };
 		B5815663886E9FC7D2FDD0AE /* Pods_EdgeDetector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EdgeDetector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B623ECF3F31F8B93A3CA9603 /* Pods-EdgeDetector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EdgeDetector.release.xcconfig"; path = "Pods/Target Support Files/Pods-EdgeDetector/Pods-EdgeDetector.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,9 +127,27 @@
 			isa = PBXGroup;
 			children = (
 				6018088B22E871F2009057A8 /* MainViewController.swift */,
-				601808A422E87342009057A8 /* MainMetalView.swift */,
+				601808AC22E87721009057A8 /* VideoCapture */,
+				601808A822E87693009057A8 /* MetalView */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		601808A822E87693009057A8 /* MetalView */ = {
+			isa = PBXGroup;
+			children = (
+				601808A422E87342009057A8 /* MainMetalView.swift */,
+				601808A922E876B9009057A8 /* mainShaders.metal */,
+			);
+			path = MetalView;
+			sourceTree = "<group>";
+		};
+		601808AC22E87721009057A8 /* VideoCapture */ = {
+			isa = PBXGroup;
+			children = (
+				601808A622E8751F009057A8 /* MainVideoCapture.swift */,
+			);
+			path = VideoCapture;
 			sourceTree = "<group>";
 		};
 		B28EA2C7DF680B93DE8074CF /* Pods */ = {
@@ -234,9 +256,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				601808AA22E876B9009057A8 /* mainShaders.metal in Sources */,
 				601808A522E87342009057A8 /* MainMetalView.swift in Sources */,
 				601808A322E87323009057A8 /* EdgeDetector.swift in Sources */,
 				6018089D22E8720A009057A8 /* EdgeDetectorModel.mlmodel in Sources */,
+				601808A722E8751F009057A8 /* MainVideoCapture.swift in Sources */,
 				6018088C22E871F2009057A8 /* MainViewController.swift in Sources */,
 				6018088A22E871F2009057A8 /* AppDelegate.swift in Sources */,
 			);
