@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import CoreMedia
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     
     @IBOutlet weak var mainMetalView: MainMetalView!
     private var mainVideoCapture: MainVideoCapture!

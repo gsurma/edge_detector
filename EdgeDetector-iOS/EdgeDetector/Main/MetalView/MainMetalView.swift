@@ -6,8 +6,6 @@
 //  Copyright © 2019 GS. All rights reserved.
 //
 
-import Foundation
-
 import MetalKit
 import CoreVideo
 import CoreML

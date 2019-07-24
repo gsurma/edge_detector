@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-import Foundation
 import UIKit
 import CoreML
 import Vision
@@ -56,13 +54,9 @@ final class EdgeDetector  {
             do {
                 try handler.perform([request])
             } catch let error {
-                print("Error: \(error)")
+                print("Prediction error: \(error)")
             }
         }
-    }
-    
-    private func sigmoid(input: Double) -> Double {
-        return 1 / (1 + exp(-input))
     }
     
     private func visionRequestDidComplete(request: VNRequest, error: Error?) {
@@ -81,5 +75,9 @@ final class EdgeDetector  {
             delegate?.predictionCompleted(edgeProbabilities: edgeProbabilities)
         }
         semaphore.signal()
+    }
+    
+    private func sigmoid(input: Double) -> Double {
+        return 1 / (1 + exp(-input))
     }
 }
