@@ -49,7 +49,6 @@ extension MainViewController: VideoCaptureDelegate {
         
         DispatchQueue.main.async {
             if let pb = pixelBuffer {
-                self.mainMetalView.pixelBuffer = pb
                 self.edgeDetector.predict(pixelBuffer: pb)
             }
         }
@@ -58,8 +57,11 @@ extension MainViewController: VideoCaptureDelegate {
 
 extension MainViewController: EdgeDetectorDelegate {
     
-    func predictionCompleted(edgeProbabilities: [Float]) {
-        mainMetalView.edgeProbabilities = edgeProbabilities
+    func predictionCompleted(edgeProbabilities: [Float], pixelBuffer: CVPixelBuffer) {
+        DispatchQueue.main.async {
+            self.mainMetalView.pixelBuffer = pixelBuffer
+            self.mainMetalView.edgeProbabilities = edgeProbabilities
+        }
     }
 }
 

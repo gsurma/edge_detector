@@ -12,47 +12,37 @@ import CoreML
 import Vision
 
 protocol EdgeDetectorDelegate {
-    func predictionCompleted(edgeProbabilities: [Float])
+    func predictionCompleted(edgeProbabilities: [Float], pixelBuffer: CVPixelBuffer)
 }
 
 final class EdgeDetector  {
     
     var delegate: EdgeDetectorDelegate?
-    private let maxInflightBuffers = 3
     private let semaphore: DispatchSemaphore!
     private var model: VNCoreMLModel!
-    private var inflightBuffer = 0
-    private var requests = [VNCoreMLRequest]()
+    private var request: VNCoreMLRequest!
+    private var pixelBuffer: CVPixelBuffer!
     
     public init() {
-        self.semaphore = DispatchSemaphore(value: maxInflightBuffers)
+        self.semaphore = DispatchSemaphore(value: 1)
         self.model = try! VNCoreMLModel(for: EdgeDetectorModel().model)
-        for _ in 0..<maxInflightBuffers {
-            let request = VNCoreMLRequest(model: self.model, completionHandler: visionRequestDidComplete)
-            request.imageCropAndScaleOption = .scaleFill
-            requests.append(request)
-        }
+        self.request = VNCoreMLRequest(model: self.model, completionHandler: visionRequestDidComplete)
+        self.request.imageCropAndScaleOption = .scaleFill
     }
 
     func predict(pixelBuffer: CVPixelBuffer) {
         guard semaphore.wait(timeout: .now()) == .success  else {
             return
         }
+        self.pixelBuffer = pixelBuffer
         let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation.leftMirrored)
         predict(handler: handler)
     }
     
     private func predict(handler: VNImageRequestHandler) {
-        let inflightIndex = inflightBuffer
-        inflightBuffer += 1
-        if inflightBuffer >= maxInflightBuffers {
-            inflightBuffer = 0
-        }
-        
         DispatchQueue.global().async {
-            let request = self.requests[inflightIndex]
             do {
-                try handler.perform([request])
+                try handler.perform([self.request])
             } catch let error {
                 print("Prediction error: \(error)")
             }
@@ -72,7 +62,7 @@ final class EdgeDetector  {
                     edgeProbabilities[index] = Float(result)
                 }
             }
-            delegate?.predictionCompleted(edgeProbabilities: edgeProbabilities)
+            delegate?.predictionCompleted(edgeProbabilities: edgeProbabilities, pixelBuffer: pixelBuffer)
         }
         semaphore.signal()
     }
