@@ -16,17 +16,20 @@ kernel void colorKernel(texture2d<float, access::read> inTexture [[ texture(0) ]
                         const device float *dataSize [[buffer(4)]],
                         uint2 gid [[ thread_position_in_grid ]]) {
     
-    float cols = dataSize[0];
-    float rows = dataSize[1];
+    float dataWidth = dataSize[0];
+    float dataHeight = dataSize[1];
     
     float drawableWidth = drawableSize[0];
     float drawableHeight = drawableSize[1];
-    
-    int scaledX = gid.x / drawableWidth * rows;
-    int scaledY = gid.y / drawableHeight * cols;
 
-    int index = scaledY + scaledX * rows;
+    int scaledX = gid.x / drawableWidth * dataWidth;
+    int scaledY = gid.y / drawableHeight * dataWidth;
+
+    int index = scaledY + scaledX * dataHeight;
     float edgeProbability = edgeProbabilities[index];
     
-    outTexture.write(float4(edgeProbability, edgeProbability, edgeProbability,1.0), gid);
+    float4 edgeColor = float4(1.0, 1.0, 1.0, 1.0);
+    float4 originalColor = inTexture.read(gid);
+    float4 mixedColor = mix(originalColor, edgeColor, half(edgeProbability));
+    outTexture.write(mixedColor, gid);
 }

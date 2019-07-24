@@ -31,6 +31,7 @@ final class EdgeDetector  {
         self.model = try! VNCoreMLModel(for: EdgeDetectorModel().model)
         for _ in 0..<maxInflightBuffers {
             let request = VNCoreMLRequest(model: self.model, completionHandler: visionRequestDidComplete)
+            request.imageCropAndScaleOption = .scaleFill
             requests.append(request)
         }
     }

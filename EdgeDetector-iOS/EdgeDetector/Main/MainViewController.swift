@@ -26,7 +26,7 @@ class MainViewController: UIViewController {
     private func setUpCamera() {
         mainVideoCapture = MainVideoCapture()
         mainVideoCapture.delegate = self
-        mainVideoCapture.setUp(sessionPreset: AVCaptureSession.Preset.hd1280x720, frameRate: 30) { success in
+        mainVideoCapture.setUp(sessionPreset: AVCaptureSession.Preset.hd1280x720, frameRate: 20) { success in
             if success {
                 self.mainVideoCapture.start()
             }
