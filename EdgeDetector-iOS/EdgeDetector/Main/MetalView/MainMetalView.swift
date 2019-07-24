@@ -14,6 +14,13 @@ import CoreML
 
 final class MainMetalView: MTKView {
     
+    lazy var dataSizeArray: [Float]  =  {
+        return [Float(textureSize), Float(textureSize)]
+    }()
+    lazy var drawableSizeArray: [Float]  =  {
+        return [Float(self.drawableSize.width), Float(self.drawableSize.height)]
+    }()
+    var edgeProbabilities: [Float] = [Float](repeating: 0, count: textureSize*textureSize)
     var pixelBuffer: CVPixelBuffer? {
         didSet {
             setNeedsDisplay()
@@ -48,6 +55,9 @@ final class MainMetalView: MTKView {
         device = metalDevice
         
         framebufferOnly = false
+        
+        drawableSize.width = 720
+        drawableSize.height = 1280
     }
     
     override func draw(_ rect: CGRect) {
@@ -76,6 +86,9 @@ final class MainMetalView: MTKView {
             computeCommandEncoder.setComputePipelineState(computePipelineState)
             computeCommandEncoder.setTexture(inputTexture, index: 0)
             computeCommandEncoder.setTexture(drawable.texture, index: 1)
+            computeCommandEncoder.setBuffer(device!.makeBuffer(bytes: &edgeProbabilities, length: MemoryLayout<Float>.size*edgeProbabilities.count, options: []), offset: 0, index: 2)
+            computeCommandEncoder.setBuffer(device!.makeBuffer(bytes: &drawableSizeArray, length: MemoryLayout<Float>.size*drawableSizeArray.count, options: []), offset: 0, index: 3)
+            computeCommandEncoder.setBuffer(device!.makeBuffer(bytes: &dataSizeArray, length: MemoryLayout<Float>.size*dataSizeArray.count, options: []), offset: 0, index: 4)
             computeCommandEncoder.dispatchThreadgroups(inputTexture.threadGroups(), threadsPerThreadgroup: inputTexture.threadGroupCount())
             computeCommandEncoder.endEncoding()
             commandBuffer.present(drawable)

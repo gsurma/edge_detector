@@ -17,6 +17,7 @@
 		601808A522E87342009057A8 /* MainMetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601808A422E87342009057A8 /* MainMetalView.swift */; };
 		601808A722E8751F009057A8 /* MainVideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601808A622E8751F009057A8 /* MainVideoCapture.swift */; };
 		601808AA22E876B9009057A8 /* mainShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 601808A922E876B9009057A8 /* mainShaders.metal */; };
+		601808AE22E88AAF009057A8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601808AD22E88AAF009057A8 /* Constants.swift */; };
 		C15DA17C104C6286FBAE5794 /* Pods_EdgeDetector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5815663886E9FC7D2FDD0AE /* Pods_EdgeDetector.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		601808A422E87342009057A8 /* MainMetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMetalView.swift; sourceTree = "<group>"; };
 		601808A622E8751F009057A8 /* MainVideoCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVideoCapture.swift; sourceTree = "<group>"; };
 		601808A922E876B9009057A8 /* mainShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = mainShaders.metal; sourceTree = "<group>"; };
+		601808AD22E88AAF009057A8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B5815663886E9FC7D2FDD0AE /* Pods_EdgeDetector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EdgeDetector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B623ECF3F31F8B93A3CA9603 /* Pods-EdgeDetector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EdgeDetector.release.xcconfig"; path = "Pods/Target Support Files/Pods-EdgeDetector/Pods-EdgeDetector.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,6 +112,7 @@
 			children = (
 				6018089522E871F3009057A8 /* Info.plist */,
 				6018089022E871F3009057A8 /* Assets.xcassets */,
+				601808AD22E88AAF009057A8 /* Constants.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				601808A722E8751F009057A8 /* MainVideoCapture.swift in Sources */,
 				6018088C22E871F2009057A8 /* MainViewController.swift in Sources */,
 				6018088A22E871F2009057A8 /* AppDelegate.swift in Sources */,
+				601808AE22E88AAF009057A8 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

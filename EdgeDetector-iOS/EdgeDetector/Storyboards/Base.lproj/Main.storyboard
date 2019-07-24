@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mtkView contentMode="scaleAspectFit" colorPixelFormat="BGRA8Unorm" depthStencilPixelFormat="Depth32Float" enableSetNeedsDisplay="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sFf-Ts-tNS" customClass="MainMetalView" customModule="EdgeDetector" customModuleProvider="target">
+                            <mtkView contentMode="scaleAspectFit" colorPixelFormat="BGRA8Unorm" depthStencilPixelFormat="Depth32Float" paused="YES" enableSetNeedsDisplay="YES" autoResizeDrawable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFf-Ts-tNS" customClass="MainMetalView" customModule="EdgeDetector" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mtkView>
                         </subviews>

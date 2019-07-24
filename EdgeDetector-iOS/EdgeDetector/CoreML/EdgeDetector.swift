@@ -25,7 +25,6 @@ final class EdgeDetector  {
     private var model: VNCoreMLModel!
     private var inflightBuffer = 0
     private var requests = [VNCoreMLRequest]()
-    private let inputSize = 500
     
     public init() {
         self.semaphore = DispatchSemaphore(value: maxInflightBuffers)
@@ -40,7 +39,7 @@ final class EdgeDetector  {
         guard semaphore.wait(timeout: .now()) == .success  else {
             return
         }
-        let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer)
+        let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation.leftMirrored)
         predict(handler: handler)
     }
     
@@ -70,9 +69,9 @@ final class EdgeDetector  {
             let bufferSize = value.shape.lazy.map { $0.intValue }.reduce(1, { $0 * $1 })
             let dataPointer = UnsafeMutableBufferPointer(start: value.dataPointer.assumingMemoryBound(to: Double.self), count: bufferSize)
             var edgeProbabilities = [Float](repeating: 0, count: bufferSize)
-            for x in 0..<inputSize {
-                for y in 0..<inputSize {
-                    let index = x * inputSize + y
+            for x in 0..<textureSize {
+                for y in 0..<textureSize {
+                    let index = x * textureSize + y
                     let rawValue = dataPointer[index]
                     let result = sigmoid(input: rawValue)
                     edgeProbabilities[index] = Float(result)
