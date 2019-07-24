@@ -28,8 +28,8 @@ kernel void colorKernel(texture2d<float, access::read> inTexture [[ texture(0) ]
     int index = scaledY + scaledX * dataHeight;
     float edgeProbability = edgeProbabilities[index];
     
-    float4 edgeColor = float4(1.0, 1.0, 1.0, 1.0);
     float4 originalColor = inTexture.read(gid);
-    float4 mixedColor = mix(originalColor, edgeColor, half(edgeProbability));
+    float4 darkenOriginalColor = mix(originalColor, float4(0.0, 0.0, 0.0, 1.0), half(0.5));
+    float4 mixedColor = mix(darkenOriginalColor, float4(1.0, 1.0, 1.0, 1.0), half(edgeProbability));
     outTexture.write(mixedColor, gid);
 }
